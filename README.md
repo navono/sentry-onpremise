@@ -2,6 +2,11 @@
 
 Official bootstrap for running your own [Sentry](https://sentry.io/) with [Docker](https://www.docker.com/).
 
+## Update
+
+- Integrated LDAP(sentry.conf.py, modify as needed)
+- Integrated mail(config.yml， modify as needed)
+
 ## Requirements
 
  * Docker 1.10.0+
