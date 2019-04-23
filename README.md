@@ -26,7 +26,7 @@ There may need to be modifications to the included `docker-compose.yml` file to 
 1. `docker volume create --name=sentry-data && docker volume create --name=sentry-postgres` - Make our local database and sentry volumes
     Docker volumes have to be created manually, as they are declared as external to be more durable.
 2. `cp -n .env.example .env` - create env config file
-3. `docker-compose build` - Build and tag the Docker services
+3. `docker-compose build` - Build and tag the Docker services, maybe need proxy as: `docker-compose build --build-arg http_proxy=http://1.2.3.4:1080 --build-arg https_proxy=http://1.2.3.4:1080`
 4. `docker-compose run --rm web config generate-secret-key` - Generate a secret key.
     Add it to `.env` as `SENTRY_SECRET_KEY`.
 5. `docker-compose run --rm web upgrade` - Build the database.
@@ -42,7 +42,11 @@ and [Nginx](http://nginx.org/).
 
 ## Updating Sentry
 
-Updating Sentry using Compose is relatively simple. Just use the following steps to update. Make sure that you have the latest version set in your Dockerfile. Or use the latest version of this repository.
+Updating Sentry using Compose is relatively simple. Just use the following steps to update. Make sure that you have the latest version set in your Dockerfile. Or use the latest version of this repository. You can use `dockertags` to check the whole tags of image like this:
+```sh
+chmod +x dockertags.sh
+dockertags sentry
+```
 
 Use the following steps after updating this repository or your Dockerfile:
 ```sh
